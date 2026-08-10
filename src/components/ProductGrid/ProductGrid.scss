@@ -1,0 +1,21 @@
+@use '../../styles/variables' as *;
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $gap-unit;
+  margin-bottom: $section-gap;
+  padding: 0 $gap-unit;
+
+  &__item {
+    min-width: 0;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: $section-gap;
+  }
+}

@@ -1,0 +1,332 @@
+@use '../../styles/variables' as *;
+
+.tv-carousel {
+  --tv-card-width: min(84vw, 78rem);
+  --tv-card-height: calc(min(80vw, 74rem) * 9 / 16);
+  --tv-card-gap: 1rem;
+  --tv-auto-ms: 10s;
+  --tv-progress-size: 0.5625rem;
+  --tv-play-size: 1.75rem;
+  --tv-bottom-space: 4rem;
+
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0 0;
+  background: $bg-page;
+  overflow: hidden;
+
+  &__viewport {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    gap: var(--tv-card-gap);
+    will-change: transform;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.is-instant {
+      transition: none;
+    }
+  }
+
+  &__card {
+    position: relative;
+    flex: 0 0 var(--tv-card-width);
+    width: var(--tv-card-width);
+    height: var(--tv-card-height);
+    border-radius: 0;
+    overflow: hidden;
+    background: #111;
+
+    &:not(.is-active) {
+      cursor: pointer;
+
+      .tv-carousel__cta,
+      .tv-carousel__meta {
+        opacity: 0.3;
+      }
+    }
+
+    &.is-active {
+      .tv-carousel__cta,
+      .tv-carousel__meta {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  &__footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 5.5rem 2.75rem 3.5rem 3rem;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.38) 28%,
+      rgba(0, 0, 0, 0.16) 55%,
+      rgba(0, 0, 0, 0.05) 78%,
+      transparent 100%
+    );
+    pointer-events: none;
+
+    a {
+      pointer-events: auto;
+    }
+  }
+
+  &__card--light &__footer {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.32) 30%,
+      rgba(0, 0, 0, 0.12) 58%,
+      rgba(0, 0, 0, 0.04) 80%,
+      transparent 100%
+    );
+  }
+
+  &__cta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.375rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: 980px;
+    background: #fff;
+    color: #1d1d1f;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-shadow: none;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.32);
+    transition: background-color 0.2s, color 0.2s, opacity 0.45s ease;
+
+    &:hover {
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-width: 0;
+    min-height: 2.375rem;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.7),
+      0 3px 12px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.45s ease;
+  }
+
+  &__genre {
+    flex-shrink: 0;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__sep {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  &__desc {
+    min-width: 0;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  // 카드 하단 ~ 섹션 하단 여백의 수직 중앙에 컨트롤 배치
+  &__controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--tv-bottom-space);
+    padding: 0 1.25rem;
+  }
+
+  &__dots {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  &__dot-btn {
+    position: relative;
+    width: var(--tv-progress-size);
+    height: var(--tv-progress-size);
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: width 0.25s ease, background-color 0.2s;
+
+    &.is-active {
+      width: 2.5rem;
+      background: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__progress {
+    position: absolute;
+    inset: 0;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: #1d1d1f;
+    border-radius: inherit;
+
+    &.is-running {
+      animation-name: tv-progress-fill;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      animation-duration: var(--tv-auto-ms);
+    }
+
+    &.is-paused {
+      animation: none;
+    }
+  }
+
+  &__play {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tv-play-size);
+    height: var(--tv-play-size);
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(210, 210, 215, 0.92);
+    color: #6e6e73;
+    transform: translateY(-50%);
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background: rgba(190, 190, 195, 0.95);
+      color: #1d1d1f;
+    }
+
+    svg {
+      display: block;
+      width: 38%;
+      height: 38%;
+    }
+  }
+}
+
+@keyframes tv-progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .tv-carousel {
+    --tv-card-width: min(88vw, 68rem);
+    --tv-card-height: calc(min(86vw, 64rem) * 9 / 16);
+    --tv-card-gap: 0.75rem;
+    --tv-play-size: 1.5rem;
+    --tv-bottom-space: 3.5rem;
+    padding: 0.35rem 0 0;
+
+    &__footer {
+      padding: 4.5rem 2rem 2.75rem 2.25rem;
+      gap: 0.75rem;
+    }
+
+    &__cta {
+      font-size: 0.9375rem;
+      min-height: 2.25rem;
+    }
+
+    &__meta {
+      font-size: 1rem;
+    }
+
+    &__dots {
+      gap: 0.8rem;
+    }
+
+    &__dot-btn.is-active {
+      width: 2.25rem;
+    }
+
+    &__play {
+      right: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .tv-carousel {
+    --tv-card-width: min(92vw, 28rem);
+    --tv-card-height: calc(min(88vw, 26rem) * 10 / 16);
+    --tv-play-size: 1.35rem;
+    --tv-bottom-space: 3.25rem;
+    padding: 0.3rem 0 0;
+
+    &__card {
+      border-radius: 0;
+    }
+
+    &__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 3.5rem 1.5rem 2.25rem 1.65rem;
+    }
+
+    &__meta {
+      font-size: 0.9375rem;
+    }
+
+    &__cta {
+      font-size: 0.875rem;
+      min-height: 2rem;
+      padding: 0.4rem 1rem;
+    }
+
+    &__dots {
+      gap: 0.7rem;
+    }
+
+    &__dot-btn.is-active {
+      width: 2rem;
+    }
+
+    &__play {
+      right: 0.75rem;
+    }
+  }
+}
