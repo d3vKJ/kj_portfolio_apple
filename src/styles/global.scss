@@ -1,0 +1,65 @@
+@use 'variables' as *;
+@use 'reset';
+
+body {
+  font-family: $font-stack;
+  color: $text-primary;
+  background-color: $bg-page;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.cta-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  padding: 0.7rem 1.375rem;
+  border-radius: 980px;
+  font-size: 1.0625rem;
+  line-height: 1.17648;
+  font-weight: 400;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  &--primary {
+    background: $button-blue;
+    color: #fff;
+    border: 1px solid transparent;
+
+    &:hover {
+      background: $button-blue-hover;
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    color: $button-blue;
+    border: 1px solid $button-blue;
+
+    &:hover {
+      background: $button-blue;
+      color: #fff;
+    }
+  }
+}

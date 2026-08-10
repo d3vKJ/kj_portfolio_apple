@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+.tv-carousel {
+  margin-bottom: $section-gap;
+  padding: 1.5rem 0 2rem;
+  background: $bg-page;
+  overflow: hidden;
+
+  &__track {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 0.375rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 999px;
+    }
+  }
+
+  &__card {
+    flex: 0 0 18.75rem;
+    scroll-snap-align: start;
+  }
+
+  &__poster {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 28rem;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    color: $text-on-dark;
+    overflow: hidden;
+  }
+
+  &__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+  }
+
+  &__genre {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  &__title {
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__desc {
+    margin-top: 0.35rem;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .tv-carousel {
+    &__card {
+      flex-basis: 15rem;
+    }
+
+    &__poster {
+      height: 22rem;
+    }
+  }
+}
