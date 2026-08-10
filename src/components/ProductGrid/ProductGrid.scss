@@ -9,7 +9,6 @@
 
   &__item {
     min-width: 0;
-    min-height: 36.25rem;
   }
 }
 
@@ -18,9 +17,5 @@
     grid-template-columns: 1fr;
     padding: 0;
     gap: $section-gap;
-
-    &__item {
-      min-height: 32rem;
-    }
   }
 }

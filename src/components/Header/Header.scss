@@ -13,21 +13,27 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   color: $nav-text;
 
+  // logo + 11 links + search + bag = 14 equal columns
   &__content {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(14, minmax(0, 1fr));
     align-items: center;
-    justify-content: space-between;
+    width: 100%;
     max-width: 62.5rem;
     height: 100%;
     margin: 0 auto;
-    padding: 0 1.375rem;
-    gap: 0.35rem;
+    padding: 0 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 0;
   }
 
   &__logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
     opacity: 0.8;
     transition: opacity 0.2s;
 
@@ -43,22 +49,7 @@
     object-fit: contain;
   }
 
-  &__list {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-    min-width: 0;
-    padding: 0 0.75rem;
-  }
-
-  &__item {
-    flex-shrink: 0;
-  }
-
   &__link {
-    display: block;
-    padding: 0 0.35rem;
     font-size: 0.75rem;
     color: $nav-text;
     opacity: 0.88;
@@ -71,20 +62,9 @@
     }
   }
 
-  &__actions {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    flex-shrink: 0;
-  }
-
   &__action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0.8;
     transition: opacity 0.2s;
-    padding: 0.25rem;
     color: $nav-text;
 
     &:hover {
@@ -95,12 +75,27 @@
 
 @media (max-width: $breakpoint-tablet) {
   .global-nav {
-    &__list {
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+
+    &__link {
       display: none;
     }
 
-    &__content {
-      justify-content: space-between;
+    &__action {
+      width: 2.75rem;
+    }
+
+    &__logo {
+      width: 2.75rem;
+    }
+
+    // keep logo left, actions right with equal visual rhythm
+    &__action:first-of-type {
+      margin-left: auto;
     }
   }
 }
