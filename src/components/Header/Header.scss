@@ -1,6 +1,9 @@
 @use '../../styles/variables' as *;
 
 .global-nav {
+  --nav-max-width: 66rem;
+  --nav-inline-pad: 1rem;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -12,17 +15,26 @@
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   color: $nav-text;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 
-  // logo + 11 links + search + bag = 14 equal columns
+  &.is-open {
+    background: #fff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+
   &__content {
-    display: grid;
-    grid-template-columns: repeat(14, minmax(0, 1fr));
+    position: relative;
+    z-index: 2;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: 62.5rem;
-    height: 100%;
+    max-width: var(--nav-max-width);
+    height: $nav-height;
     margin: 0 auto;
-    padding: 0 0.5rem;
+    padding: 0 var(--nav-inline-pad);
   }
 
   &__item {
@@ -30,7 +42,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    min-width: 0;
+    flex-shrink: 0;
   }
 
   &__logo {
@@ -51,6 +63,7 @@
 
   &__link {
     font-size: 0.75rem;
+    font-weight: 500;
     color: $nav-text;
     opacity: 0.88;
     transition: opacity 0.2s;
@@ -69,6 +82,123 @@
 
     &:hover {
       opacity: 1;
+    }
+  }
+
+  &__flyout {
+    position: absolute;
+    top: $nav-height;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: #fff;
+    height: 0;
+    transition: height 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__flyout-shell {
+    width: 100%;
+  }
+
+  // 헤더 로고와 동일한 시작선
+  &__flyout-frame {
+    width: 100%;
+    max-width: var(--nav-max-width);
+    margin: 0 auto;
+    padding: 2.4rem var(--nav-inline-pad) 3.1rem;
+  }
+
+  &__flyout-panel {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 4.5rem;
+    opacity: 0;
+    transition: opacity 0.14s ease;
+
+    &--in {
+      opacity: 1;
+      transition: opacity 0.18s ease;
+    }
+
+    &--out {
+      opacity: 0;
+      transition: opacity 0.12s ease;
+    }
+
+    &--closed {
+      opacity: 0;
+      transition: none;
+    }
+  }
+
+  &__mega-column {
+    min-width: 0;
+  }
+
+  &__mega-title {
+    margin-bottom: 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.33337;
+    color: $text-secondary;
+  }
+
+  &__mega-list {
+    display: flex;
+    flex-direction: column;
+
+    &--primary {
+      gap: 0.7rem;
+    }
+
+    &--secondary {
+      gap: 0.55rem;
+    }
+  }
+
+  &__mega-link {
+    display: inline-block;
+    color: $text-primary;
+    transition: opacity 0.15s;
+
+    &:hover {
+      opacity: 0.72;
+    }
+
+    &--primary {
+      font-size: 1.375rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    &--secondary {
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.33337;
+      color: $text-primary;
+    }
+  }
+
+  &__curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 990;
+    border: none;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 0.2s ease;
+
+    &.is-visible {
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 }
@@ -93,9 +223,13 @@
       width: 2.75rem;
     }
 
-    // keep logo left, actions right with equal visual rhythm
     &__action:first-of-type {
       margin-left: auto;
+    }
+
+    &__flyout,
+    &__curtain {
+      display: none;
     }
   }
 }

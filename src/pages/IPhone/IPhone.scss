@@ -1,0 +1,599 @@
+@use '../../styles/variables' as *;
+
+.iphone-page {
+  padding-top: $nav-height;
+  background: $bg-page;
+  color: $text-primary;
+  overflow: hidden;
+
+  &__ribbon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(2.75rem + 10px);
+    padding: calc(0.7rem + 5px) 1.5rem;
+    background: $bg-section-light;
+    text-align: center;
+  }
+
+  &__ribbon-text {
+    max-width: 52rem;
+    color: $text-primary;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  &__ribbon-link {
+    color: $link-blue;
+    white-space: nowrap;
+
+    &::after {
+      content: ' ›';
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__hero {
+    height: 395px;
+    padding: 0 1.5rem;
+    background: $bg-page;
+    box-sizing: border-box;
+  }
+
+  &__hero-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 3.75rem;
+    width: 78.75rem; // 1260px — 타이틀·nav·라인업 좌측 축 통일
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 3.25rem 0 1.5rem;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  &__hero-title {
+    font-size: 5rem; // 80px
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  &__product-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    height: 15.1875rem; // 243px
+    gap: 0.5rem;
+    margin: 0;
+    overflow-x: auto;
+    padding-bottom: 0;
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+  }
+
+  &__product-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.45rem;
+    flex: 1 1 0;
+    min-width: 7.5rem; // 120px
+    height: 100%;
+    padding: 0 1.25rem 0.95rem; // 0 20px 15px
+    color: $text-primary;
+    box-sizing: border-box;
+  }
+
+  &__product-nav-thumb-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 4.75rem;
+    height: 4.75rem;
+    flex-shrink: 0;
+  }
+
+  &__product-nav-thumb {
+    display: block;
+    width: 4.75rem;
+    height: 4.75rem;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  &__product-nav-label {
+    padding: 10px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1.25;
+    white-space: nowrap;
+
+    &--bold {
+      font-weight: 600;
+    }
+  }
+
+  &__product-nav-sub {
+    margin-top: -0.15rem;
+    color: #b64400;
+    font-size: 0.75rem; // 12px
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &__section {
+    padding: 3.5rem 1.5rem;
+
+    &--muted {
+      background: $bg-section-light;
+    }
+
+    &--lineup {
+      padding-top: 7rem;
+      background: $bg-section-light;
+    }
+  }
+
+  &__section-inner {
+    max-width: 78.75rem; // 1260px — hero와 동일
+    margin: 0 auto;
+  }
+
+  &__section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  &__section-title {
+    margin-bottom: 1.75rem;
+    font-size: clamp(1.75rem, 3.5vw + 1rem, 50px);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  &__section-heading &__section-title {
+    margin-bottom: 0;
+  }
+
+  &__section-link {
+    flex-shrink: 0;
+    color: $link-blue;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+
+    &::after {
+      content: ' ›';
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__media {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    background: linear-gradient(160deg, #e8e8ed 0%, #d2d2d7 100%);
+    border-radius: 1.25rem;
+
+    &--tall {
+      width: 372px;
+      height: 395px;
+      margin-bottom: 0;
+      object-fit: cover;
+      border-radius: 1.75rem;
+      background: #e8e8ed;
+      transform-origin: center center;
+      transition: transform 0.35s ease;
+    }
+
+    &--banner {
+      min-height: 28rem;
+      height: 28rem;
+      border-radius: 1.75rem;
+    }
+
+    &--shop {
+      margin-top: auto;
+      aspect-ratio: 16 / 11;
+      border-radius: 1rem;
+    }
+
+    &--know {
+      width: 100%;
+      height: 100%;
+      border-radius: 1.5rem;
+    }
+
+    &--privacy {
+      min-height: 26rem;
+      height: 26rem;
+      border-radius: 1.75rem;
+      background: #111;
+    }
+
+    &--half {
+      aspect-ratio: 16 / 11;
+      margin-bottom: 1rem;
+    }
+
+    &--friend {
+      aspect-ratio: 16 / 12;
+      margin-bottom: 1rem;
+      border-radius: 1.25rem;
+    }
+  }
+
+  &__lineup-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 372px;
+    width: 372px;
+    min-width: 0;
+    text-align: center;
+    scroll-snap-align: start;
+
+    &:hover .iphone-page__media--tall {
+      transform: scale(1.03);
+    }
+  }
+
+  &__lineup-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 372px;
+    height: 419px; // 395 + 상하 여유 (scale 1.03 대응)
+    margin-bottom: 0.85rem;
+    overflow: visible;
+  }
+
+  &__color-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    margin: 0.15rem 0 1.35rem;
+  }
+
+  &__color-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border: none;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.28);
+  }
+
+  &__lineup-name {
+    font-size: 1.75rem; // 28px
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  &__lineup-desc {
+    max-width: 20rem;
+    height: 54px;
+    margin-top: 1.15rem;
+    color: $text-primary;
+    font-size: 1.0625rem; // 17px
+    line-height: 1.59; // ≈27px × 2줄 = 54px
+    white-space: pre-line; // \n 줄바꿈 인식
+    overflow: hidden;
+  }
+
+  &__lineup-price {
+    margin-top: 1.25rem;
+    color: $text-primary;
+    font-size: 1.0625rem; // 17px
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  &__card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  &__card-text {
+    margin-top: 0.35rem;
+    color: $text-secondary;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  &__card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-top: 0.9rem;
+
+    &--center {
+      justify-content: center;
+      margin-top: 2.25rem;
+    }
+  }
+
+  &__btn {
+    font-size: 0.875rem;
+    line-height: 1.2;
+
+    &--primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.25rem;
+      padding: 0.45rem 1rem;
+      border-radius: 980px;
+      background: $button-blue;
+      color: #fff;
+
+      &:hover {
+        background: $button-blue-hover;
+      }
+    }
+
+    &--dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.25rem;
+      padding: 0.5rem 1.15rem;
+      border-radius: 980px;
+      background: #1d1d1f;
+      color: #fff;
+
+      &:hover {
+        background: #000;
+      }
+    }
+
+    &--link {
+      color: $link-blue;
+
+      &::after {
+        content: ' ›';
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__feature-banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+  }
+
+  &__feature-copy {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.15rem;
+    padding: 2rem 1.5rem 2rem 4rem;
+    text-align: center;
+    color: $text-primary;
+    box-sizing: border-box;
+  }
+
+  &__feature-headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-size: clamp(1.5rem, 2.0vw, 1.95rem); // ~20–28px
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  &__feature-line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  &__reason-card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 clamp(17rem, 28vw, 20rem);
+    min-height: 22rem;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    scroll-snap-align: start;
+  }
+
+  &__know-card {
+    position: relative;
+    flex: 0 0 clamp(15rem, 24vw, 18rem);
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: start;
+  }
+
+  &__know-label {
+    position: absolute;
+    left: 1.15rem;
+    bottom: 1.15rem;
+    z-index: 1;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  &__privacy-banner {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__privacy-copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  &__privacy-title {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  &__essentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  &__essential-card,
+  &__friend-card {
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+    background: $bg-section-light;
+  }
+
+  &__section--muted &__essential-card,
+  &__section--muted &__friend-card {
+    background: #fff;
+  }
+
+  &__friends {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .iphone-page {
+    &__friends {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__media--banner,
+    &__media--privacy {
+      min-height: 22rem;
+      height: 22rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .iphone-page {
+    &__hero {
+      height: auto;
+    }
+
+    &__hero-inner {
+      height: auto;
+      padding: 2rem 0 1.5rem;
+      gap: 2rem;
+    }
+
+    &__section {
+      padding: 2.5rem 1rem;
+    }
+
+    &__lineup-card {
+      flex-basis: min(372px, 78vw);
+      width: min(372px, 78vw);
+
+      .iphone-page__lineup-media {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 372 / 419;
+      }
+
+      .iphone-page__media--tall {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 372 / 395;
+      }
+    }
+
+    &__reason-card {
+      flex-basis: 78vw;
+      min-height: 20rem;
+    }
+
+    &__know-card {
+      flex-basis: 70vw;
+    }
+
+    &__section-heading {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    &__product-nav {
+      justify-content: flex-start;
+      gap: 1.25rem;
+      height: auto;
+      min-height: 0;
+    }
+
+    &__product-nav-item {
+      flex: 0 0 auto;
+      height: auto;
+    }
+
+    &__essentials,
+    &__friends {
+      grid-template-columns: 1fr;
+    }
+
+    &__media--banner,
+    &__media--privacy {
+      min-height: 18rem;
+      height: 18rem;
+    }
+
+    &__feature-copy {
+      width: 100%;
+      padding: 1.25rem;
+      justify-content: flex-end;
+      padding-bottom: 1.5rem;
+    }
+
+    &__feature-line {
+      white-space: normal;
+    }
+  }
+}

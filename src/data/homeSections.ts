@@ -1,12 +1,20 @@
 import phoneImg from '../../assets/main/1_phone.jpg'
 import macbookAirImg from '../../assets/main/2_macbook.jpg'
 import ipadAirImg from '../../assets/main/3_ipad_air.jpg'
+import ipadAirLogo from '../../assets/main/3_ipad_air_logo.png'
 import macbookProImg from '../../assets/main/grid_macbook_pro.jpg'
 import watchImg from '../../assets/main/grid_apple_watch.jpg'
 import airpodsImg from '../../assets/main/grid_airpods_pro.jpg'
 import ipadProImg from '../../assets/main/grid_ipad_pro.jpg'
 import watchUltraImg from '../../assets/main/grid_apple_watch_ultra.jpg'
 import tradeInImg from '../../assets/main/grid_tradein.jpg'
+import tvMovie1 from '../../assets/main_tv/movie_1.jpg'
+import tvMovie2 from '../../assets/main_tv/movie_2.jpg'
+import tvMovie3 from '../../assets/main_tv/movie_3.jpg'
+import tvMovie4 from '../../assets/main_tv/movie_4.jpg'
+import tvMovie5 from '../../assets/main_tv/movie_5.jpg'
+import tvMovie6 from '../../assets/main_tv/movie_6.jpg'
+import tvMovie7 from '../../assets/main_tv/movie_7.jpg'
 
 export type Cta = {
   label: string
@@ -50,7 +58,8 @@ export type TvSlide = {
   title: string
   genre: string
   description: string
-  placeholder_color: string
+  image: string
+  theme: Theme
 }
 
 export const home_sections: HomeSection[] = [
@@ -85,6 +94,7 @@ export const home_sections: HomeSection[] = [
     type: 'hero',
     theme: 'light',
     title: 'iPad Air',
+    title_image: ipadAirLogo,
     subtitle: '이제 막강한 성능의 M4 탑재.',
     ctas: [
       { label: '더 알아보기', to: '/ipad' },
@@ -189,48 +199,55 @@ export const tv_slides: TvSlide[] = [
     title: '프렌즈 & 네이버스',
     genre: '드라마',
     description: '욕망은 무죄',
-    placeholder_color: '#3d2b1f',
+    image: tvMovie1,
+    theme: 'light',
   },
   {
     id: 'boomerang',
     title: '부메랑',
     genre: '코미디',
     description: '조나 힐 감독, 키아누 리브스 주연의 새로운 블랙 코미디',
-    placeholder_color: '#1a3a4a',
+    image: tvMovie2,
+    theme: 'dark',
   },
   {
     id: 'eternity',
     title: '저세상 로맨스',
     genre: '로맨스',
     description: '저 너머에도 사랑은 존재할까?',
-    placeholder_color: '#4a2c4a',
+    image: tvMovie3,
+    theme: 'dark',
   },
   {
     id: 'monarch',
     title: '모나크: 레거시 오브 몬스터즈',
     genre: '어드벤처',
     description: '새로운 위협',
-    placeholder_color: '#2a3a1a',
+    image: tvMovie4,
+    theme: 'dark',
   },
   {
     id: 'for-all-mankind',
     title: '포 올 맨카인드',
     genre: '드라마',
     description: '화성을 향한 인류의 새로운 골드러시가 시작된다',
-    placeholder_color: '#1a2a4a',
+    image: tvMovie5,
+    theme: 'dark',
   },
   {
     id: 'f1',
     title: 'F1 더 무비',
     genre: '액션',
     description: '달릴 준비 됐나?',
-    placeholder_color: '#4a1a1a',
+    image: tvMovie6,
+    theme: 'dark',
   },
   {
     id: 'pachinko',
     title: '파친코',
     genre: '드라마',
     description: '우리 안에는 운명을 스스로 바꿀 용기가 있다',
-    placeholder_color: '#3a2a1a',
+    image: tvMovie7,
+    theme: 'dark',
   },
 ]

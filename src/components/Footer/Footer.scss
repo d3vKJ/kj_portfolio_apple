@@ -9,7 +9,7 @@
   &__inner {
     max-width: 61.25rem;
     margin: 0 auto;
-    padding: 1.0625rem 1.375rem 1.5rem;
+    padding: 1.0625rem 1.375rem 1.75rem;
   }
 
   &__legal {
@@ -24,17 +24,26 @@
     }
   }
 
-  &__columns {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem;
-    padding: 1.25rem 0;
+  &__directory {
+    padding: 1.25rem 0 0.5rem;
   }
 
-  &__column-title {
+  &__columns {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0 1.25rem;
+  }
+
+  &__group {
+    & + & {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__group-title {
     display: block;
     width: 100%;
-    margin-bottom: 0.55rem;
+    margin-bottom: 0.6rem;
     font-size: 0.75rem;
     font-weight: 600;
     color: $text-primary;
@@ -54,21 +63,30 @@
 
     &:hover {
       text-decoration: underline;
+      color: $text-primary;
     }
   }
 
   &__shop-help {
-    padding-bottom: 0.8rem;
+    padding: 1rem 0 0.85rem;
     border-bottom: 1px solid #d2d2d7;
     color: $text-secondary;
+  }
+
+  &__shop-link {
+    color: $link-blue;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__bottom {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem 1rem;
-    padding-top: 0.8rem;
+    gap: 0.5rem 0.75rem;
+    padding-top: 0.85rem;
   }
 
   &__copyright {
@@ -88,6 +106,7 @@
 
     &:hover {
       text-decoration: underline;
+      color: $text-primary;
     }
 
     .site-footer__bottom-links li:first-child & {
@@ -96,6 +115,7 @@
 
     .site-footer__bottom-links li:last-child & {
       border-right: none;
+      padding-right: 0;
     }
   }
 
@@ -103,17 +123,43 @@
     margin-left: auto;
     color: $footer-text;
   }
+
+  &__corporate {
+    margin-top: 0.75rem;
+    color: $text-secondary;
+    font-size: 0.6875rem;
+    line-height: 1.45;
+  }
+
+  &__corporate-line {
+    & + & {
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .site-footer {
+    &__columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 1.5rem;
+    }
+  }
 }
 
 @media (max-width: $breakpoint-mobile) {
   .site-footer {
-    &__columns {
-      grid-template-columns: 1fr;
-      gap: 0;
+    &__directory {
       padding: 0;
     }
 
-    &__column {
+    &__columns {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    &__group {
+      margin-top: 0;
       border-bottom: 1px solid #d2d2d7;
 
       &--open {
@@ -121,13 +167,13 @@
           display: flex;
         }
 
-        .site-footer__column-title::after {
+        .site-footer__group-title::after {
           content: '−';
         }
       }
     }
 
-    &__column-title {
+    &__group-title {
       display: flex;
       justify-content: space-between;
       align-items: center;

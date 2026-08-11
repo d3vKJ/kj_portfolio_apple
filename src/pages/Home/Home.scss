@@ -3,4 +3,9 @@
 .home {
   padding-top: $nav-height;
   background: $bg-page;
+
+  // 마지막 그리드와 TV 섹션 사이 간격 (위 여백)
+  > .product-grid:has(+ .tv-carousel) {
+    margin-bottom: 0.4rem;
+  }
 }
