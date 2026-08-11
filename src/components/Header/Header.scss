@@ -1,7 +1,7 @@
 @use '../../styles/variables' as *;
 
 .global-nav {
-  --nav-max-width: 66rem;
+  --nav-max-width: 63.2rem;
   --nav-inline-pad: 1rem;
 
   position: fixed;
@@ -13,7 +13,6 @@
   background: $nav-bg;
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   color: $nav-text;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 
@@ -62,8 +61,8 @@
   }
 
   &__link {
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.715rem;
+    font-weight: 450;
     color: $nav-text;
     opacity: 0.88;
     transition: opacity 0.2s;
@@ -76,9 +75,14 @@
   }
 
   &__action {
+    line-height: 0;
     opacity: 0.8;
     transition: opacity 0.2s;
     color: $nav-text;
+
+    svg {
+      display: block;
+    }
 
     &:hover {
       opacity: 1;
@@ -95,13 +99,20 @@
     background: #fff;
     height: 0;
     transition: height 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.is-opening {
+      transition: height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &.is-closing {
+      transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   }
 
   &__flyout-shell {
     width: 100%;
   }
 
-  // 헤더 로고와 동일한 시작선
   &__flyout-frame {
     width: 100%;
     max-width: var(--nav-max-width);
@@ -130,6 +141,40 @@
     &--closed {
       opacity: 0;
       transition: none;
+    }
+
+    &--drop {
+      .global-nav__mega-title,
+      .global-nav__mega-list li {
+        opacity: 0;
+      }
+
+      &.global-nav__flyout-panel--in {
+        .global-nav__mega-title,
+        .global-nav__mega-list li {
+          animation: mega-item-in 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .global-nav__mega-title {
+          animation-delay: 0.1s;
+        }
+
+        @for $i from 1 through 14 {
+          .global-nav__mega-list li:nth-child(#{$i}) {
+            animation-delay: #{0.16 + ($i - 1) * 0.055}s;
+          }
+        }
+      }
+    }
+
+    &--drop-out {
+      opacity: 1;
+      transition: none;
+
+      .global-nav__mega-title,
+      .global-nav__mega-list li {
+        animation: mega-item-out 0.2s ease both;
+      }
     }
   }
 
@@ -200,6 +245,30 @@
       opacity: 1;
       pointer-events: auto;
     }
+  }
+}
+
+@keyframes mega-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.8rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mega-item-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-0.35rem);
   }
 }
 

@@ -6,7 +6,7 @@ import './Header.scss'
 
 const SWITCH_OUT_MS = 120
 const CLOSE_DELAY_MS = 40
-const CLOSE_ANIM_MS = 220
+const CLOSE_HEIGHT_MS = 820
 const SETTLE_MS = 110
 
 export function Header() {
@@ -16,6 +16,8 @@ export function Header() {
     'closed',
   )
   const [flyout_height, set_flyout_height] = useState(0)
+  const [use_drop, set_use_drop] = useState(false)
+  const [is_closing, set_is_closing] = useState(false)
 
   const close_timer_ref = useRef<ReturnType<typeof setTimeout> | null>(null)
   const switch_timer_ref = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -56,10 +58,12 @@ export function Header() {
     return el.scrollHeight
   }
 
-  const show_menu = (menu: MegaMenu) => {
+  const show_menu = (menu: MegaMenu, drop = false) => {
     display_path_ref.current = menu.path
     set_active_path(menu.path)
     set_display_menu(menu)
+    set_is_closing(false)
+    set_use_drop(drop)
     set_panel_state('in')
   }
 
@@ -84,7 +88,7 @@ export function Header() {
     // 최초 오픈
     if (!display_path_ref.current) {
       clear_switch_timer()
-      show_menu(menu)
+      show_menu(menu, true)
       return
     }
 
@@ -143,6 +147,8 @@ export function Header() {
     clear_settle_timer()
     pending_path_ref.current = null
     display_path_ref.current = null
+    set_is_closing(true)
+    set_use_drop(false)
     set_active_path(null)
     set_panel_state('out')
     set_flyout_height(0)
@@ -150,17 +156,20 @@ export function Header() {
     switch_timer_ref.current = setTimeout(() => {
       set_display_menu(null)
       set_panel_state('closed')
-    }, CLOSE_ANIM_MS)
+      set_is_closing(false)
+    }, CLOSE_HEIGHT_MS)
   }
 
   useLayoutEffect(() => {
+    if (is_closing) return
+
     if (panel_state === 'closed' || !display_menu) {
       if (panel_state === 'closed') set_flyout_height(0)
       return
     }
 
     set_flyout_height(measure_height())
-  }, [display_menu, panel_state])
+  }, [display_menu, panel_state, is_closing])
 
   useEffect(() => {
     return () => {
@@ -177,12 +186,30 @@ export function Header() {
       if (event.key === 'Escape') close_menu()
     }
 
+    const prevent_scroll = (event: Event) => {
+      event.preventDefault()
+    }
+
+    const prevent_key_scroll = (event: KeyboardEvent) => {
+      if (
+        ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(
+          event.key,
+        )
+      ) {
+        event.preventDefault()
+      }
+    }
+
     document.addEventListener('keydown', on_key_down)
-    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', prevent_key_scroll)
+    document.addEventListener('wheel', prevent_scroll, { passive: false })
+    document.addEventListener('touchmove', prevent_scroll, { passive: false })
 
     return () => {
       document.removeEventListener('keydown', on_key_down)
-      document.body.style.overflow = ''
+      document.removeEventListener('keydown', prevent_key_scroll)
+      document.removeEventListener('wheel', prevent_scroll)
+      document.removeEventListener('touchmove', prevent_scroll)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [is_open])
@@ -272,14 +299,14 @@ export function Header() {
         </nav>
 
         <div
-          className={`global-nav__flyout${is_open || panel_state !== 'closed' ? ' is-visible' : ''}`}
+          className={`global-nav__flyout${is_open || panel_state !== 'closed' ? ' is-visible' : ''}${use_drop ? ' is-opening' : ''}${is_closing ? ' is-closing' : ''}`}
           style={{ height: `${flyout_height}px` }}
           aria-hidden={!is_open}
         >
           <div className="global-nav__flyout-shell" ref={measure_ref}>
             <div className="global-nav__flyout-frame">
               <div
-                className={`global-nav__flyout-panel global-nav__flyout-panel--${panel_state}`}
+                className={`global-nav__flyout-panel global-nav__flyout-panel--${is_closing ? 'in' : panel_state}${use_drop ? ' global-nav__flyout-panel--drop' : ''}${is_closing ? ' global-nav__flyout-panel--drop-out' : ''}`}
               >
                 {display_menu
                   ? display_menu.columns.map((column) => (
