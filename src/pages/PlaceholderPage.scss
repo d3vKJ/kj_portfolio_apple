@@ -13,11 +13,64 @@
   &__title {
     font-size: 2.5rem;
     font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
   &__text {
     margin-top: 0.75rem;
+    color: $text-primary;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  &__hint {
+    margin-top: 0.5rem;
     color: $text-secondary;
     font-size: 1.0625rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 8.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 999px;
+    background: $button-blue;
+    color: $text-on-dark;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: $button-blue-hover;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .placeholder-page {
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 18rem;
+    }
+
+    &__button {
+      width: 100%;
+    }
   }
 }
