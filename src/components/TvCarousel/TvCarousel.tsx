@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import type { TvSlide } from '../../data/homeSections'
+import { tvMobileLogo, type TvSlide } from '../../data/homeSections'
 import './TvCarousel.scss'
 
 const AUTO_MS = 10000
@@ -150,23 +150,55 @@ export function TvCarousel({ slides }: TvCarouselProps) {
                   if (!is_active) go_to_real(slide.real_index)
                 }}
               >
-                <img
-                  src={slide.image}
-                  alt=""
-                  className="tv-carousel__image"
-                  draggable={false}
-                />
-                <div className="tv-carousel__footer">
-                  <Link to="/tv-home" className="tv-carousel__cta">
-                    지금 시청하기
-                  </Link>
-                  <p className="tv-carousel__meta">
-                    <span className="tv-carousel__genre">{slide.genre}</span>
-                    <span className="tv-carousel__sep" aria-hidden="true">
-                      •
-                    </span>
-                    <span className="tv-carousel__desc">{slide.description}</span>
-                  </p>
+                <div className="tv-carousel__desktop">
+                  <img
+                    src={slide.image}
+                    alt=""
+                    className="tv-carousel__image"
+                    draggable={false}
+                  />
+                  <div className="tv-carousel__footer">
+                    <Link to="/tv-home" className="tv-carousel__cta">
+                      지금 시청하기
+                    </Link>
+                    <p className="tv-carousel__meta">
+                      <span className="tv-carousel__genre">{slide.genre}</span>
+                      <span className="tv-carousel__sep" aria-hidden="true">
+                        •
+                      </span>
+                      <span className="tv-carousel__desc">{slide.description}</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="tv-carousel__mobile">
+                  <img
+                    src={slide.mobile_image}
+                    alt=""
+                    className="tv-carousel__mobile-bg"
+                    draggable={false}
+                  />
+                  <div className="tv-carousel__mobile-content">
+                    <div className="tv-carousel__mobile-header">
+                      <img
+                        src={tvMobileLogo}
+                        alt=""
+                        className="tv-carousel__mobile-logo"
+                      />
+                      <img
+                        src={slide.mobile_title_image}
+                        alt={slide.title}
+                        className="tv-carousel__mobile-title"
+                      />
+                    </div>
+                    <div className="tv-carousel__mobile-footer">
+                      <p className="tv-carousel__mobile-genre">{slide.genre}</p>
+                      <p className="tv-carousel__mobile-desc">{slide.description}</p>
+                      <Link to="/tv-home" className="tv-carousel__cta tv-carousel__cta--mobile">
+                        지금 시청하기
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </article>
             )

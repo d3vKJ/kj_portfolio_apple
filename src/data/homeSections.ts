@@ -9,6 +9,14 @@ import airpodsImg from '../../assets/main/grid_airpods_pro.jpg'
 import ipadProImg from '../../assets/main/grid_ipad_pro.jpg'
 import watchUltraImg from '../../assets/main/grid_apple_watch_ultra.jpg'
 import tradeInImg from '../../assets/main/grid_tradein.jpg'
+import mobilePhoneImg from '../../assets/main/mobile/mobile_1_phone.jpg'
+import mobileMacbookAirImg from '../../assets/main/mobile/mobile_2_macbook.jpg'
+import mobileIpadAirImg from '../../assets/main/mobile/mobile_3_ipad_air.jpg'
+import mobileMacProImg from '../../assets/main/mobile/mobile_mac_pro.jpg'
+import mobileWatchImg from '../../assets/main/mobile/mobile_apple_watch.jpg'
+import mobileAirpodsImg from '../../assets/main/mobile/mobile_airpods.jpg'
+import mobileIpadProImg from '../../assets/main/mobile/mobile_ipad_pro.jpg'
+import mobileTradeInImg from '../../assets/main/mobile/mobile_tradein.jpg'
 import tvMovie1 from '../../assets/main_tv/movie_1.jpg'
 import tvMovie2 from '../../assets/main_tv/movie_2.jpg'
 import tvMovie3 from '../../assets/main_tv/movie_3.jpg'
@@ -16,6 +24,21 @@ import tvMovie4 from '../../assets/main_tv/movie_4.jpg'
 import tvMovie5 from '../../assets/main_tv/movie_5.jpg'
 import tvMovie6 from '../../assets/main_tv/movie_6.jpg'
 import tvMovie7 from '../../assets/main_tv/movie_7.jpg'
+import tvMobileLogo from '../../assets/main_tv/mobile/mobile_logo.png'
+import tvMobileMovie1 from '../../assets/main_tv/mobile/mobile_movie_1.jpg'
+import tvMobileMovie1Title from '../../assets/main_tv/mobile/mobile_movie_1_title.png'
+import tvMobileMovie2 from '../../assets/main_tv/mobile/mobile_movie_2.jpg'
+import tvMobileMovie2Title from '../../assets/main_tv/mobile/mobile_movie_2_title.png'
+import tvMobileMovie3 from '../../assets/main_tv/mobile/mobile_movie_3.jpg'
+import tvMobileMovie3Title from '../../assets/main_tv/mobile/mobile_movie_3_title.png'
+import tvMobileMovie4 from '../../assets/main_tv/mobile/mobile_movie_4.jpg'
+import tvMobileMovie4Title from '../../assets/main_tv/mobile/mobile_movie_4_title.png'
+import tvMobileMovie5 from '../../assets/main_tv/mobile/mobile_movie_5.jpg'
+import tvMobileMovie5Title from '../../assets/main_tv/mobile/mobile_movie_5_title.png'
+import tvMobileMovie6 from '../../assets/main_tv/mobile/mobile_movie_6.jpg'
+import tvMobileMovie6Title from '../../assets/main_tv/mobile/mobile_movie_6_title.png'
+import tvMobileMovie7 from '../../assets/main_tv/mobile/mobile_movie_7.jpg'
+import tvMobileMovie7Title from '../../assets/main_tv/mobile/mobile_movie_7_title.png'
 
 export type Cta = {
   label: string
@@ -33,6 +56,7 @@ export type HeroSection = {
   subtitle: string
   ctas: Cta[]
   image: string
+  mobile_image?: string
   background_color: string
 }
 
@@ -43,6 +67,7 @@ export type TileSection = {
   subtitle: string
   ctas: Cta[]
   image: string
+  mobile_image?: string
   background_color: string
 }
 
@@ -70,8 +95,12 @@ export type TvSlide = {
   genre: string
   description: string
   image: string
+  mobile_image: string
+  mobile_title_image: string
   theme: Theme
 }
+
+export { tvMobileLogo }
 
 export const home_sections: HomeSection[] = [
   {
@@ -97,6 +126,7 @@ export const home_sections: HomeSection[] = [
       { label: 'iPhone 쇼핑하기', to: '/iphone' },
     ],
     image: phoneImg,
+    mobile_image: mobilePhoneImg,
     background_color: '#f5f5f7',
   },
   {
@@ -110,6 +140,7 @@ export const home_sections: HomeSection[] = [
       { label: '구입하기', to: '/mac' },
     ],
     image: macbookAirImg,
+    mobile_image: mobileMacbookAirImg,
     background_color: '#e8f4fc',
   },
   {
@@ -124,6 +155,7 @@ export const home_sections: HomeSection[] = [
       { label: '구입하기', to: '/ipad' },
     ],
     image: ipadAirImg,
+    mobile_image: mobileIpadAirImg,
     background_color: '#e8f1f8',
   },
   {
@@ -140,6 +172,7 @@ export const home_sections: HomeSection[] = [
           { label: '구입하기', to: '/mac' },
         ],
         image: macbookProImg,
+        mobile_image: mobileMacProImg,
         background_color: '#000',
       },
       {
@@ -152,6 +185,7 @@ export const home_sections: HomeSection[] = [
           { label: '구입하기', to: '/watch' },
         ],
         image: watchImg,
+        mobile_image: mobileWatchImg,
         background_color: '#f5f5f7',
       },
     ],
@@ -170,6 +204,7 @@ export const home_sections: HomeSection[] = [
           { label: '구입하기', to: '/airpods' },
         ],
         image: airpodsImg,
+        mobile_image: mobileAirpodsImg,
         background_color: '#f5f5f7',
       },
       {
@@ -182,6 +217,7 @@ export const home_sections: HomeSection[] = [
           { label: '구입하기', to: '/ipad' },
         ],
         image: ipadProImg,
+        mobile_image: mobileIpadProImg,
         background_color: '#000',
       },
     ],
@@ -210,6 +246,7 @@ export const home_sections: HomeSection[] = [
           'iPhone 13 이상의 모델을 보상 판매하면 ₩270,000-₩1,260,000 상당의 크레딧이.',
         ctas: [{ label: '견적 확인하기', to: '/iphone' }],
         image: tradeInImg,
+        mobile_image: mobileTradeInImg,
         background_color: '#f5f5f7',
       },
     ],
@@ -223,6 +260,8 @@ export const tv_slides: TvSlide[] = [
     genre: '드라마',
     description: '욕망은 무죄',
     image: tvMovie1,
+    mobile_image: tvMobileMovie1,
+    mobile_title_image: tvMobileMovie1Title,
     theme: 'light',
   },
   {
@@ -231,6 +270,8 @@ export const tv_slides: TvSlide[] = [
     genre: '코미디',
     description: '조나 힐 감독, 키아누 리브스 주연의 새로운 블랙 코미디',
     image: tvMovie2,
+    mobile_image: tvMobileMovie2,
+    mobile_title_image: tvMobileMovie2Title,
     theme: 'dark',
   },
   {
@@ -239,6 +280,8 @@ export const tv_slides: TvSlide[] = [
     genre: '로맨스',
     description: '저 너머에도 사랑은 존재할까?',
     image: tvMovie3,
+    mobile_image: tvMobileMovie3,
+    mobile_title_image: tvMobileMovie3Title,
     theme: 'dark',
   },
   {
@@ -247,6 +290,8 @@ export const tv_slides: TvSlide[] = [
     genre: '어드벤처',
     description: '새로운 위협',
     image: tvMovie4,
+    mobile_image: tvMobileMovie4,
+    mobile_title_image: tvMobileMovie4Title,
     theme: 'dark',
   },
   {
@@ -255,6 +300,8 @@ export const tv_slides: TvSlide[] = [
     genre: '드라마',
     description: '화성을 향한 인류의 새로운 골드러시가 시작된다',
     image: tvMovie5,
+    mobile_image: tvMobileMovie5,
+    mobile_title_image: tvMobileMovie5Title,
     theme: 'dark',
   },
   {
@@ -263,6 +310,8 @@ export const tv_slides: TvSlide[] = [
     genre: '액션',
     description: '달릴 준비 됐나?',
     image: tvMovie6,
+    mobile_image: tvMobileMovie6,
+    mobile_title_image: tvMobileMovie6Title,
     theme: 'dark',
   },
   {
@@ -271,6 +320,8 @@ export const tv_slides: TvSlide[] = [
     genre: '드라마',
     description: '우리 안에는 운명을 스스로 바꿀 용기가 있다',
     image: tvMovie7,
+    mobile_image: tvMobileMovie7,
+    mobile_title_image: tvMobileMovie7Title,
     theme: 'dark',
   },
 ]

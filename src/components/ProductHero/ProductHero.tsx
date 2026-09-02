@@ -9,6 +9,7 @@ type ProductHeroProps = {
   subtitle: string
   ctas: Cta[]
   image: string
+  mobile_image?: string
   background_color: string
 }
 
@@ -19,6 +20,7 @@ export function ProductHero({
   subtitle,
   ctas,
   image,
+  mobile_image,
   background_color,
 }: ProductHeroProps) {
   return (
@@ -27,7 +29,12 @@ export function ProductHero({
         className="product-hero__unit"
         style={{ backgroundColor: background_color }}
       >
-        <img src={image} alt="" className="product-hero__image" />
+        <picture>
+          {mobile_image ? (
+            <source media="(max-width: 734px)" srcSet={mobile_image} />
+          ) : null}
+          <img src={image} alt="" className="product-hero__image" />
+        </picture>
         <div className="product-hero__copy">
           {title_image ? (
             <h2 className="product-hero__title product-hero__title--logo">

@@ -32,6 +32,7 @@ export function Home() {
               subtitle={section.subtitle}
               ctas={section.ctas}
               image={section.image}
+              mobile_image={section.mobile_image}
               background_color={section.background_color}
             />
           )

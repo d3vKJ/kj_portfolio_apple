@@ -18,6 +18,7 @@ export function ProductGrid({ tiles }: ProductGridProps) {
             subtitle={tile.subtitle}
             ctas={tile.ctas}
             image={tile.image}
+            mobile_image={tile.mobile_image}
             background_color={tile.background_color}
             show_watch_mark={tile.id === 'watch-series-11'}
           />

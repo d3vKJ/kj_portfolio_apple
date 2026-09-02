@@ -9,6 +9,7 @@ type ProductTileProps = {
   subtitle: string
   ctas: Cta[]
   image: string
+  mobile_image?: string
   background_color: string
   show_watch_mark?: boolean
 }
@@ -20,6 +21,7 @@ export function ProductTile({
   subtitle,
   ctas,
   image,
+  mobile_image,
   background_color,
   show_watch_mark = false,
 }: ProductTileProps) {
@@ -37,7 +39,12 @@ export function ProductTile({
         className="product-tile__unit"
         style={{ backgroundColor: background_color }}
       >
-        <img src={image} alt="" className="product-tile__image" />
+        <picture>
+          {mobile_image ? (
+            <source media="(max-width: 734px)" srcSet={mobile_image} />
+          ) : null}
+          <img src={image} alt="" className="product-tile__image" />
+        </picture>
         <div className="product-tile__copy">
           <h3 className="product-tile__title">
             {show_watch_mark && (
