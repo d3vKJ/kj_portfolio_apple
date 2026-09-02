@@ -147,11 +147,19 @@ export function Support() {
                     .join(' ')}
                 >
                   <div className="support-page__feature-media">
-                    <img
-                      className="support-page__feature-image"
-                      src={feature.image}
-                      alt=""
-                    />
+                    <picture>
+                      {'mobile_image' in feature && feature.mobile_image ? (
+                        <source
+                          media="(max-width: 734px)"
+                          srcSet={feature.mobile_image}
+                        />
+                      ) : null}
+                      <img
+                        className="support-page__feature-image"
+                        src={feature.image}
+                        alt=""
+                      />
+                    </picture>
                   </div>
                   <div className="support-page__feature-copy">
                     <h2 className="support-page__feature-title">{feature.title}</h2>

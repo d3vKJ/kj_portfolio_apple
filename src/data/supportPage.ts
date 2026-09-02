@@ -10,6 +10,8 @@ import icon_repair from '../../assets/support/icon-receipt-purchase-history.svg'
 import icon_subscription from '../../assets/support/icon-calendar-subscription.svg'
 import tile_applecare from '../../assets/support/tile-side-applecare.image.large_2x.png'
 import tile_repair from '../../assets/support/tile-feature-repair-and-service.image.large_2x.png'
+import mobile_care from '../../assets/support/mobile/mobile_care.png'
+import mobile_repair from '../../assets/support/mobile/mobile_repair.png'
 import tile_support_app from '../../assets/support/content-block-apple-support.png'
 import tile_today_at_apple from '../../assets/support/tile-feature-round-todayatapple.png'
 
@@ -52,6 +54,7 @@ export const support_features = [
     link_label: '더 알아보기',
     link_href: '/support',
     image: tile_applecare,
+    mobile_image: mobile_care,
     image_position: 'left' as const,
   },
   {
@@ -62,6 +65,7 @@ export const support_features = [
     link_label: '수리 시작하기',
     link_href: '/support',
     image: tile_repair,
+    mobile_image: mobile_repair,
     image_position: 'right' as const,
   },
 ]
