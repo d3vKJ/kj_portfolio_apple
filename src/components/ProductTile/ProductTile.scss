@@ -71,7 +71,7 @@
 @media (max-width: $breakpoint-mobile) {
   .product-tile {
     &__unit {
-      height: 480px;
+      height: 600px;
     }
 
     &__copy {
@@ -83,7 +83,14 @@
     }
 
     &__subtitle {
-      font-size: 1.1875rem;
+      font-size: 1.3125rem;
+    }
+
+    &--trade-in {
+      .product-tile__subtitle {
+        font-size: 1.0625rem;
+        line-height: 1.25;
+      }
     }
 
     &__ctas {

@@ -111,7 +111,7 @@
 @media (max-width: $breakpoint-mobile) {
   .product-hero {
     &__unit {
-      height: 400px;
+      height: 560px;
     }
 
     &__copy {
@@ -127,7 +127,7 @@
     }
 
     &__subtitle {
-      font-size: 0.9375rem;
+      font-size: 1.0625rem;
     }
 
     &__ctas {

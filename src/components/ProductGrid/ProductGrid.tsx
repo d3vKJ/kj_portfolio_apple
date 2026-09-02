@@ -12,6 +12,7 @@ export function ProductGrid({ tiles }: ProductGridProps) {
       {tiles.map((tile) => (
         <div key={tile.id} className="product-grid__item">
           <ProductTile
+            id={tile.id}
             theme={tile.theme}
             title={tile.title}
             subtitle={tile.subtitle}

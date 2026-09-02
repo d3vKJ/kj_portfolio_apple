@@ -90,15 +90,16 @@
 @media (max-width: $breakpoint-mobile) {
   .event-hero {
     &__unit {
-      height: 36rem;
+      height: 33rem;
     }
 
     &__image {
-      object-position: center 30%;
+      object-position: center top;
     }
 
     &__copy {
-      padding-bottom: 1rem;
+      justify-content: flex-end;
+      padding: 0 1.25rem 1.25rem;
     }
 
     &__title {
@@ -111,6 +112,7 @@
     }
 
     &__cta {
+      margin-top: 1.125rem;
       padding: 0.55rem 1.1rem;
       font-size: 0.875rem;
     }

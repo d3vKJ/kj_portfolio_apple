@@ -18,6 +18,7 @@ export function Header() {
   const [flyout_height, set_flyout_height] = useState(0)
   const [use_drop, set_use_drop] = useState(false)
   const [is_closing, set_is_closing] = useState(false)
+  const [is_mobile_menu_open, set_is_mobile_menu_open] = useState(false)
 
   const close_timer_ref = useRef<ReturnType<typeof setTimeout> | null>(null)
   const switch_timer_ref = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -160,6 +161,15 @@ export function Header() {
     }, CLOSE_HEIGHT_MS)
   }
 
+  const close_mobile_menu = () => {
+    set_is_mobile_menu_open(false)
+  }
+
+  const toggle_mobile_menu = () => {
+    close_menu()
+    set_is_mobile_menu_open((open) => !open)
+  }
+
   useLayoutEffect(() => {
     if (is_closing) return
 
@@ -180,10 +190,13 @@ export function Header() {
   }, [])
 
   useEffect(() => {
-    if (!is_open) return
+    if (!is_open && !is_mobile_menu_open) return
 
     const on_key_down = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') close_menu()
+      if (event.key === 'Escape') {
+        if (is_mobile_menu_open) close_mobile_menu()
+        else close_menu()
+      }
     }
 
     const prevent_scroll = (event: Event) => {
@@ -212,12 +225,27 @@ export function Header() {
       document.removeEventListener('touchmove', prevent_scroll)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [is_open])
+  }, [is_open, is_mobile_menu_open])
+
+  useEffect(() => {
+    const on_resize = () => {
+      if (window.innerWidth > 1068) close_mobile_menu()
+    }
+
+    window.addEventListener('resize', on_resize)
+    return () => window.removeEventListener('resize', on_resize)
+  }, [])
 
   return (
     <>
       <header
-        className={`global-nav${is_open ? ' is-open' : ''}`}
+        className={[
+          'global-nav',
+          is_open ? 'is-open' : '',
+          is_mobile_menu_open ? 'is-mobile-open' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onMouseLeave={schedule_close}
         onMouseEnter={clear_close_timer}
       >
@@ -296,7 +324,68 @@ export function Header() {
               />
             </svg>
           </button>
+
+          <button
+            type="button"
+            className="global-nav__item global-nav__action global-nav__menu-toggle"
+            aria-label={is_mobile_menu_open ? '메뉴 닫기' : '메뉴 열기'}
+            aria-expanded={is_mobile_menu_open}
+            aria-controls="global-nav-mobile-menu"
+            onClick={toggle_mobile_menu}
+          >
+            <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true">
+              {is_mobile_menu_open ? (
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  d="M4.2 4.2 13.8 13.8M13.8 4.2 4.2 13.8"
+                />
+              ) : (
+                <>
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    d="M1 4.5h16"
+                  />
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    d="M1 9h16"
+                  />
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    d="M1 13.5h16"
+                  />
+                </>
+              )}
+            </svg>
+          </button>
         </nav>
+
+        <div
+          id="global-nav-mobile-menu"
+          className={`global-nav__mobile-menu${is_mobile_menu_open ? ' is-open' : ''}`}
+          aria-hidden={!is_mobile_menu_open}
+        >
+          <ul className="global-nav__mobile-list">
+            {nav_items.map((item) => (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className="global-nav__mobile-link"
+                  onClick={close_mobile_menu}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div
           className={`global-nav__flyout${is_open || panel_state !== 'closed' ? ' is-visible' : ''}${use_drop ? ' is-opening' : ''}${is_closing ? ' is-closing' : ''}`}
@@ -341,10 +430,13 @@ export function Header() {
 
       <button
         type="button"
-        className={`global-nav__curtain${is_open ? ' is-visible' : ''}`}
+        className={`global-nav__curtain${is_open || is_mobile_menu_open ? ' is-visible' : ''}`}
         aria-label="메뉴 닫기"
-        tabIndex={is_open ? 0 : -1}
-        onClick={close_menu}
+        tabIndex={is_open || is_mobile_menu_open ? 0 : -1}
+        onClick={() => {
+          if (is_mobile_menu_open) close_mobile_menu()
+          else close_menu()
+        }}
       />
     </>
   )

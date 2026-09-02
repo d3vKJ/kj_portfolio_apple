@@ -3,6 +3,7 @@ import type { Cta, Theme } from '../../data/homeSections'
 import './ProductTile.scss'
 
 type ProductTileProps = {
+  id?: string
   theme: Theme
   title: string
   subtitle: string
@@ -13,6 +14,7 @@ type ProductTileProps = {
 }
 
 export function ProductTile({
+  id,
   theme,
   title,
   subtitle,
@@ -22,7 +24,15 @@ export function ProductTile({
   show_watch_mark = false,
 }: ProductTileProps) {
   return (
-    <article className={`product-tile product-tile--${theme}`}>
+    <article
+      className={[
+        'product-tile',
+        `product-tile--${theme}`,
+        id ? `product-tile--${id}` : '',
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
       <div
         className="product-tile__unit"
         style={{ backgroundColor: background_color }}
