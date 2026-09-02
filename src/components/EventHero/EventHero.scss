@@ -1,0 +1,118 @@
+@use '../../styles/variables' as *;
+
+.event-hero {
+  margin-bottom: $section-gap;
+  color: #fff;
+  text-align: center;
+
+  &__unit {
+    position: relative;
+    width: 100%;
+    height: 43.25rem;
+    overflow: hidden;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__copy {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1.5rem clamp(1rem, 2.5vw, 2rem);
+    pointer-events: none;
+
+    a {
+      pointer-events: auto;
+    }
+  }
+
+  &__title {
+    font-size: 3.125rem;
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.015em;
+    text-shadow: 0 0.125rem 1.5rem rgba(16, 38, 70, 0.35);
+  }
+
+  &__subtitle {
+    margin-top: 0.75rem;
+    font-size: 1.7rem;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.25rem;
+    border-radius: 980px;
+    background: #fff;
+    color: $text-primary;
+    font-size: 0.9375rem;
+    line-height: 1.17648;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+
+    &:hover {
+      background: #e8e8ed;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .event-hero {
+    &__title {
+      font-size: 2.5rem;
+    }
+
+    &__subtitle {
+      font-size: 1.375rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .event-hero {
+    &__unit {
+      height: 36rem;
+    }
+
+    &__image {
+      object-position: center 30%;
+    }
+
+    &__copy {
+      padding-bottom: 1rem;
+    }
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__subtitle {
+      margin-top: 0.7rem;
+      font-size: 1.125rem;
+    }
+
+    &__cta {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.875rem;
+    }
+  }
+}

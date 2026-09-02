@@ -1,3 +1,4 @@
+import eventHeroImg from '../../assets/main/0_hero.jpg'
 import phoneImg from '../../assets/main/1_phone.jpg'
 import macbookAirImg from '../../assets/main/2_macbook.jpg'
 import ipadAirImg from '../../assets/main/3_ipad_air.jpg'
@@ -51,7 +52,17 @@ export type GridSection = {
   tiles: TileSection[]
 }
 
-export type HomeSection = HeroSection | GridSection
+export type EventHeroSection = {
+  id: string
+  type: 'event'
+  title: string
+  subtitle: string
+  cta: Cta
+  image: string
+  background_color: string
+}
+
+export type HomeSection = EventHeroSection | HeroSection | GridSection
 
 export type TvSlide = {
   id: string
@@ -63,6 +74,18 @@ export type TvSlide = {
 }
 
 export const home_sections: HomeSection[] = [
+  {
+    id: 'event-hero',
+    type: 'event',
+    title: '깜짝 빛날 시간.',
+    subtitle: '한국 시간 9월 10일 새벽 2시,\nApple 스페셜 이벤트 생중계.',
+    cta: {
+      label: '캘린더에 추가하기',
+      to: '/support',
+    },
+    image: eventHeroImg,
+    background_color: '#5f83b3',
+  },
   {
     id: 'iphone',
     type: 'hero',

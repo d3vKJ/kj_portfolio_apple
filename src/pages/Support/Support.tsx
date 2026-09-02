@@ -8,8 +8,40 @@ import {
   support_product_items,
   support_quick_actions,
   support_service_programs,
+  type InfoParagraph,
 } from '../../data/supportPage'
 import './Support.scss'
+
+function render_lines(text: string) {
+  return text.split('\n').map((line, index, lines) => (
+    <span key={`${line}-${index}`}>
+      {line}
+      {index < lines.length - 1 ? <br /> : null}
+    </span>
+  ))
+}
+
+function render_paragraph_content(paragraph: InfoParagraph) {
+  if (typeof paragraph === 'string') {
+    return render_lines(paragraph)
+  }
+
+  return paragraph.map((segment, index) => {
+    if (segment.type === 'text') {
+      return <span key={index}>{render_lines(segment.value)}</span>
+    }
+
+    return (
+      <Link
+        key={index}
+        to={segment.href}
+        className="support-page__link support-page__link--inline"
+      >
+        {segment.label}
+      </Link>
+    )
+  })
+}
 
 export function Support() {
   return (
@@ -171,21 +203,57 @@ export function Support() {
 
           <Reveal className="support-page__section support-page__section--info" delay_ms={120}>
             <div className="support-page__info-list">
-              {support_info_blocks.map((block) => (
-                <article key={block.id} className="support-page__info-block">
-                  <h2 className="support-page__info-title">{block.title}</h2>
-                  {block.paragraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 24)} className="support-page__info-text">
-                      {paragraph}
-                    </p>
-                  ))}
-                  {'link_label' in block && block.link_label ? (
-                    <Link to={block.link_href ?? '/support'} className="support-page__link">
-                      {block.link_label}
-                    </Link>
-                  ) : null}
-                </article>
-              ))}
+              {support_info_blocks.map((block) => {
+                const has_link = 'link_label' in block && block.link_label
+                const last_paragraph_index = block.paragraphs.length - 1
+
+                return (
+                  <article
+                    key={block.id}
+                    className={[
+                      'support-page__info-block',
+                      block.id === 'counterfeit'
+                        ? 'support-page__info-block--left'
+                        : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                  >
+                    <h2 className="support-page__info-title">{block.title}</h2>
+                    {block.paragraphs.map((paragraph, index) => {
+                      const is_link_paragraph =
+                        has_link && index === last_paragraph_index
+
+                      return (
+                        <p
+                          key={`${block.id}-${index}`}
+                          className={[
+                            'support-page__info-text',
+                            is_link_paragraph
+                              ? 'support-page__info-text--with-link'
+                              : '',
+                          ]
+                            .filter(Boolean)
+                            .join(' ')}
+                        >
+                          {render_paragraph_content(paragraph)}
+                          {is_link_paragraph ? (
+                            <>
+                              {' '}
+                              <Link
+                                to={block.link_href ?? '/support'}
+                                className="support-page__link"
+                              >
+                                {block.link_label}
+                              </Link>
+                            </>
+                          ) : null}
+                        </p>
+                      )
+                    })}
+                  </article>
+                )
+              })}
             </div>
           </Reveal>
         </div>

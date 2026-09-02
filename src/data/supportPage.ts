@@ -87,23 +87,47 @@ export const support_explore_items = [
   },
 ]
 
+export type InfoTextSegment =
+  | { type: 'text'; value: string }
+  | { type: 'link'; label: string; href: string }
+
+export type InfoParagraph = string | InfoTextSegment[]
+
 export const support_info_blocks = [
   {
     id: 'durability',
     title: '내구성을 고려한 설계',
     paragraphs: [
-      'Apple 제품은 오래 사용할 수 있도록 설계되었습니다. 견고한 소재와 정밀한 엔지니어링으로 일상적인 사용에 견디며, 소프트웨어 업데이트를 통해 시간이 지나도 새로운 기능을 경험할 수 있습니다.',
-      'Apple은 제품의 수명 주기 전반에 걸쳐 수리 가능성과 재활용 가능성을 고려합니다. 공인 서비스를 통해 기기를 오래 사용하세요.',
+      'Apple은 항상 고객에게 최고의 경험을 제공하기 위해 노력하고 있으며, 이를 위해 오래 사용할 수 있는 제품을 디자인하고 있습니다.\n내구성을 고려한 설계는 Apple의 전사적인 노력으로, 첫 번째 프로토타입을 제작하기 훨씬 전에 초기 결정을 내리고 과거 고객 사용 데이터와\n향후 사용 예측을 반영합니다. 안전, 보안, 개인 정보 보호에서 타협하지 않으면서 내구성과 수리 용이성 사이의 균형을 유지해야 합니다.',
+      '안전하고 신뢰할 수 있는 수리를 비롯하여 내구성을 고려한 Apple의 설계 방식에 대해 자세히 알아보십시오.',
     ],
     link_label: '자세히 보기(PDF)',
     link_href: '/support',
   },
   {
     id: 'counterfeit',
-    title: '모조품 주의',
+    title: '유사/모조품 주의',
     paragraphs: [
-      'Apple 공인 서비스 제공업체가 아닌 곳에서 수리를 받으면 안전 문제가 발생할 수 있으며, 기기 성능에 영향을 줄 수 있습니다. 비공식 부품은 Apple의 품질 및 안전 기준을 충족하지 않을 수 있습니다.',
-      '수리가 필요할 때는 Apple Store 또는 Apple 공인 서비스 제공업체를 방문하세요.',
+      [
+        {
+          type: 'text' as const,
+          value:
+            '일부 유사/모조품과 타사 배터리 및 전원 어댑터는 제대로 설계되지 않아 안전 관련 문제를 초래할 수 있습니다. 배터리 교체 시 Apple 정품 배터리로 교체하기 위해서는 ',
+        },
+        { type: 'link' as const, label: 'Apple Store', href: '/support' },
+        { type: 'text' as const, value: '또는' },
+        {
+          type: 'link' as const,
+          label: 'Apple 공인 서비스 제공업체',
+          href: '/support',
+        },
+        {
+          type: 'text' as const,
+          value:
+            '를 방문하시는 것이 좋습니다. Apple 기기 충전용 어댑터를 교체해야 한다면 Apple 전원 어댑터로 교체하시는 것이 좋습니다.',
+        },
+      ],
+      '정품이 아닌 교체용 디스플레이는 시각적 품질이 좋지 않거나 제대로 작동하지 않을 수 있습니다. 신뢰할 수 있는 전문가가 정품 Apple 부품만을 사용하여 Apple 인증 디스플레이 수리를 수행합니다.',
     ],
   },
 ]
